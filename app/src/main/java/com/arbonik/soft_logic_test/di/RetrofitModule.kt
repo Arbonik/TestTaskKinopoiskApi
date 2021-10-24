@@ -1,8 +1,7 @@
 package com.arbonik.soft_logic_test.di
 
 import com.arbonik.soft_logic_test.MoviesPageSource
-import com.arbonik.soft_logic_test.network.KinopoiskReference
-import com.google.gson.Gson
+import com.arbonik.soft_logic_test.network.MoviesReference
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -29,8 +28,8 @@ object RetrofitModule {
             .build()
 
     @Provides
-    fun kinopoistReference(retrofit: Retrofit) = retrofit.create(KinopoiskReference::class.java)
+    fun kinopoistReference(retrofit: Retrofit) = retrofit.create(MoviesReference::class.java)
 
     @Provides
-    fun source(kinopoiskReference: KinopoiskReference) = MoviesPageSource(kinopoiskReference)
+    fun source(moviesReference: MoviesReference) = MoviesPageSource(moviesReference)
 }

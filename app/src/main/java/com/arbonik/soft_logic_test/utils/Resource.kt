@@ -1,4 +1,4 @@
-package com.arbonik.soft_logic_test.data.utils
+package com.arbonik.soft_logic_test.utils
 
 sealed class Resource<T>(
     val data: T? = null,

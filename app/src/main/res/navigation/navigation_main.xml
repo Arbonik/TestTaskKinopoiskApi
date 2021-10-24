@@ -11,10 +11,20 @@
         android:label="movies_fragment"
         tools:layout="@layout/movies_fragment" >
 
+        <action
+            android:id="@+id/action_moviesFragment_to_movieItemFragment"
+            app:destination="@id/movieItemFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/movieItemFragment"
         android:name="com.arbonik.soft_logic_test.ui.MovieItemFragment"
         android:label="movie_item_fragment"
-        tools:layout="@layout/movie_item_fragment" />
+        tools:layout="@layout/movie_item_fragment" >
+        <argument
+            android:name="moviesId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

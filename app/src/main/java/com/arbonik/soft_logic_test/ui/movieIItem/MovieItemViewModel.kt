@@ -1,4 +1,4 @@
-package com.arbonik.soft_logic_test.ui
+package com.arbonik.soft_logic_test.ui.movieIItem
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

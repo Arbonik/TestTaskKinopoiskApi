@@ -1,4 +1,4 @@
-package com.arbonik.soft_logic_test.ui
+package com.arbonik.soft_logic_test.ui.MoviesFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arbonik.soft_logic_test.R
 import com.arbonik.soft_logic_test.databinding.MoviesFragmentBinding
+import com.arbonik.soft_logic_test.ui.MoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 

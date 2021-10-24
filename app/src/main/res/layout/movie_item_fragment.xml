@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryLightColor"
     android:orientation="vertical"
-    android:background="@color/secondaryDarkColor"
     tools:context=".ui.MovieItemFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/primaryDarkColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -30,9 +29,12 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
+                android:focusable="false"
+                android:isIndicator="false"
                 android:numStars="10" />
 
             <TextView

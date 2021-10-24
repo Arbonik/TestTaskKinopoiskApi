@@ -64,10 +64,12 @@ class MovieItemFragment @Inject constructor() : Fragment() {
                                 progressBar.visibility = View.GONE
                                 ratingBar.rating = item.rating_kinopoisk.toFloat()
                                 actorsTextView.text = item.actors.joinToString()
-                                russiaPreview.text =
-                                    getString(R.string.russiaPreview) + item.premiere_russia
-                                worldPreview.text =
-                                    getString(R.string.worldPremier) + item.premiere_world
+                                item.premiere_world?.let { prew ->
+                                    getString(R.string.worldPremier) + prew
+                                }
+                                item.premiere_russia?.let { prew ->
+                                    getString(R.string.russiaPreview) + prew
+                                }
                                 item.countries?.let {
                                     countiesTextView.text = it.joinToString()
                                 }

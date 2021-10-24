@@ -1,9 +1,8 @@
-package com.arbonik.soft_logic_test
+package com.arbonik.soft_logic_test.network
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.arbonik.soft_logic_test.data.allMovies.Movy
-import com.arbonik.soft_logic_test.network.MoviesReference
 import retrofit2.HttpException
 import javax.inject.Inject
 

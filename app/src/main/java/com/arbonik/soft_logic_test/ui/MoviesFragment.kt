@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arbonik.soft_logic_test.R
 import com.arbonik.soft_logic_test.databinding.MoviesFragmentBinding
@@ -22,8 +24,10 @@ class MoviesFragment : Fragment() {
     private lateinit var binding: MoviesFragmentBinding
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        MoviesAdapter(requireContext()){
-            findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToMovieItemFragment())
+        MoviesAdapter(requireContext()) {
+            findNavController().navigate(
+                MoviesFragmentDirections.actionMoviesFragmentToMovieItemFragment(it)
+            )
         }
     }
 
@@ -41,6 +45,9 @@ class MoviesFragment : Fragment() {
         binding.listView.layoutManager = LinearLayoutManager(requireContext())
         lifecycle.coroutineScope.launchWhenStarted {
             viewModel.pageLoad.collectLatest(adapter::submitData)
+        }
+        adapter.addLoadStateListener { combinedLoadStates ->
+            binding.progressBar.isVisible = combinedLoadStates.refresh == LoadState.Loading
         }
     }
 }

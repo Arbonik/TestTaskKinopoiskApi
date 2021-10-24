@@ -12,7 +12,10 @@ import com.arbonik.soft_logic_test.data.allMovies.Movy
 import com.arbonik.soft_logic_test.databinding.MovieItemBinding
 import com.bumptech.glide.Glide
 
-class MoviesAdapter(context: Context, val itemClickListener : (movieId : String) -> Unit) : PagingDataAdapter<Movy, MoviesAdapter.MovyViewHolder>(
+class MoviesAdapter(
+    context: Context,
+    val itemClickListener: (movieId: String) -> Unit
+) : PagingDataAdapter<Movy, MoviesAdapter.MovyViewHolder>(
     MoviesDiffItemCallback,
 ) {
     private val inflater = LayoutInflater.from(context)
@@ -28,10 +31,10 @@ class MoviesAdapter(context: Context, val itemClickListener : (movieId : String)
     inner class MovyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val viewBinding = MovieItemBinding.bind(itemView)
         fun bind(movy: Movy?) {
-            viewBinding.cardView.setOnClickListener{
-                itemClickListener(movy?.id.toString())
+            viewBinding.cardView.setOnClickListener {
+                itemClickListener(movy?.id_kinopoisk.toString())
             }
-            Glide.with(itemView).load("https://"+movy?.poster).into(viewBinding.image)
+            Glide.with(itemView).load("https://" + movy?.poster).into(viewBinding.image)
             viewBinding.title.text = movy?.title
             viewBinding.description.text = movy?.description
         }

@@ -9,7 +9,6 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.navArgs
 import com.arbonik.soft_logic_test.R
-import com.arbonik.soft_logic_test.databinding.MovieItemBinding
 import com.arbonik.soft_logic_test.databinding.MovieItemFragmentBinding
 import com.arbonik.soft_logic_test.utils.Resource
 import com.bumptech.glide.Glide
@@ -20,9 +19,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MovieItemFragment @Inject constructor() : Fragment() {
 
-    private lateinit var binding : MovieItemFragmentBinding
-    private val viewModel: MovieItemViewModel by hiltNavGraphViewModels(R.navigation.navigation_main)
-    private val args : MovieItemFragmentArgs by navArgs()
+    private lateinit var binding: MovieItemFragmentBinding
+    private val viewModel: MovieItemViewModel by hiltNavGraphViewModels(R.id.navigation_main)
+    private val args: MovieItemFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +40,15 @@ class MovieItemFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initMovieObserver(view)
+    }
+
+    private fun initMovieObserver(
+        view: View
+    ) {
         lifecycle.coroutineScope.launchWhenStarted {
             viewModel.movieState.collectLatest {
-                when(it){
+                when (it) {
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
                         binding.errorTextView.visibility = View.VISIBLE
@@ -53,11 +58,26 @@ class MovieItemFragment @Inject constructor() : Fragment() {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     is Resource.Success -> {
-                        binding.progressBar.visibility = View.GONE
-
-                        Glide.with(view).load("https://" + it.data!!.poster).into(binding.image)
-                        binding.title.text = it.data.title
-                        binding.description.text = it.data.description
+                        if (it.data != null) {
+                            val item = it.data
+                            with(binding) {
+                                progressBar.visibility = View.GONE
+                                ratingBar.rating = item.rating_kinopoisk.toFloat()
+                                actorsTextView.text = item.actors.joinToString()
+                                russiaPreview.text =
+                                    getString(R.string.russiaPreview) + item.premiere_russia
+                                worldPreview.text =
+                                    getString(R.string.worldPremier) + item.premiere_world
+                                item.countries?.let {
+                                    countiesTextView.text = it.joinToString()
+                                }
+                                ratingBar.rating = item.rating_kinopoisk.toFloat()
+                                Glide.with(view).load("https://" + item.poster)
+                                    .into(binding.image)
+                                title.text = item.title
+                                description.text = item.description
+                            }
+                        }
                     }
                 }
             }

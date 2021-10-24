@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Soft-Logic-Test</string>
+    <string name="worldPremier">\"Премьера в мирe: \"</string>
+    <string name="russiaPreview">\"Премьера в россии: \"</string>
 </resources>

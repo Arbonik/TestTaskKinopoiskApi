@@ -1,6 +1,6 @@
 package com.arbonik.soft_logic_test.di
 
-import com.arbonik.soft_logic_test.MoviesPageSource
+import com.arbonik.soft_logic_test.network.MoviesPageSource
 import com.arbonik.soft_logic_test.network.MoviesReference
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -13,12 +13,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitModule {
+object NetworkModule {
 
     const val BASE_URL = "https://api.kinopoisk.cloud"
     private val gson = GsonBuilder()
         .setLenient()
         .create()
+
     @Provides
     @Singleton
     fun retrofitClient() =
